@@ -1,0 +1,117 @@
+{
+  "variables": {
+    "ansible_roles_path": "./ansible/roles",
+    "vpc": "{{env `BUILD_VPC_ID`}}",
+    "subnet": "{{env `BUILD_SUBNET_ID`}}",
+    "aws_region": "{{env `AWS_REGION`}}",
+    "ssh_keypair_name": "{{env `SSH_KEYPAIR_NAME`}}",
+    "ssh_private_key_file": "{{env `SSH_PRIVATE_KEY_FILE`}}",
+    "ami_name": "packer-aws-webapp-{{isotime \"2006-01-02_15-04-06\"}}",
+    "source_ami": "{{env `BASE_AMI_ID`}}",
+    "atlas_token": "{{ env `ATLAS_TOKEN` }}",
+    "cpus": "1",
+    "headless": "",
+    "memory": "2048",
+    "hostname": "vagrant",
+    "source_path": "../packer-aws-java/output-ubuntu1604-virtualbox-ovf/ubuntu1604.ovf",
+    "ssh_fullname": "vagrant",
+    "ssh_password": "vagrant",
+    "ssh_username": "vagrant",
+    "vagrantfile_template": "",
+    "vm_name": "ubuntu1604",
+    "version": "{{isotime \"20060102.030405\"}}"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "{{user `aws_region`}}",
+      "source_ami": "{{user `source_ami`}}",
+      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ssh_keypair_name": "{{user `ssh_keypair_name`}}",
+      "ssh_private_key_file": "{{user `ssh_private_key_file`}}",
+      "ami_name": "{{user `ami_name` | clean_ami_name}}",
+      "tags": {
+        "Name": "{{user `ami_name`}}"
+      },
+      "run_tags": { 
+        "Name": "{{user `ami_name`}}"
+      },
+      "run_volume_tags": {
+        "Name": "{{user `ami_name`}}"
+      },
+      "snapshot_tags": {
+        "Name": "{{user `ami_name`}}"
+      },
+      "ami_description": "Webapp Image, with Elastic monitoring agents",
+      "associate_public_ip_address": "true",
+      "vpc_id": "{{user `vpc`}}",
+      "subnet_id": "{{user `subnet`}}"
+    },
+    {
+      "type": "virtualbox-ovf",
+      "source_path": "{{ user `source_path` }}",
+      "headless": "{{ user `headless` }}",
+      "output_directory": "output-{{ user `vm_name` }}-virtualbox-ovf",
+      "post_shutdown_delay": "1m",
+      "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
+      "ssh_password": "{{ user `ssh_password` }}",
+      "ssh_username": "{{ user `ssh_username` }}",
+      "ssh_wait_timeout": "600s",
+      "vboxmanage": [
+        [
+          "modifyvm", "{{.Name}}", "--nictype1", "virtio"
+        ],
+        [
+          "modifyvm", "{{.Name}}", "--memory", "{{ user `memory` }}"
+        ],
+        [
+          "modifyvm", "{{.Name}}", "--cpus", "{{ user `cpus` }}"
+        ]
+      ],
+      "virtualbox_version_file": ".vbox_version",
+      "vm_name": "{{user `vm_name`}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell-local",
+  	  "command": "ansible-galaxy install --force -v --roles-path='./ansible/roles' --role-file='./ansible/requirements.yml'"
+    },
+    {
+      "type": "ansible",
+      "user": "{{ user `ansible_user` }}",
+      "playbook_file": "./ansible/playbook.yml",
+      "only": ["virtualbox-ovf"]
+    },
+    {
+      "type": "ansible",
+      "user": "ubuntu",
+      "playbook_file": "./ansible/playbook.yml",
+      "only": ["amazon-ebs"]
+    },
+    {
+      "type": "shell-local",
+  	  "command": "export PACKER_BUILDER='virtualbox-ovf'; export VM_NAME='{{ user `vm_name` }}'; rake spec",
+      "only": ["virtualbox-ovf"]
+    },
+    {
+      "type": "shell-local",
+  	  "command": "export PACKER_BUILDER='amazon-ebs'; export AMI_NAME='{{ user `ami_name` }}'; export SSH_PRIVATE_KEY_FILE='{{ user `ssh_private_key_file` }}'; rake spec",
+      "only": ["amazon-ebs"]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "manifest.json",
+      "strip_path": true
+    },
+	{
+	  "type": "vagrant",
+	  "keep_input_artifact": true,
+      "output": "box/{{.Provider}}/{{user `vm_name`}}-{{user `version`}}.box",
+	  "vagrantfile_template": "{{ user `vagrantfile_template` }}"
+	}
+  ]
+}
