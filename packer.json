@@ -6,8 +6,8 @@
     "aws_region": "{{env `AWS_REGION`}}",
     "ssh_keypair_name": "{{env `SSH_KEYPAIR_NAME`}}",
     "ssh_private_key_file": "{{env `SSH_PRIVATE_KEY_FILE`}}",
-    "ami_name": "packer-aws-webapp-{{isotime \"2006-01-02_15-04-06\"}}",
-    "source_ami": "{{env `BASE_AMI_ID`}}",
+    "ami_name": "packer-aws-elk-{{isotime \"2006-01-02_15-04-06\"}}",
+    "source_ami": "{{env `JAVA_AMI_ID`}}",
     "atlas_token": "{{ env `ATLAS_TOKEN` }}",
     "cpus": "1",
     "headless": "",
@@ -34,7 +34,7 @@
       "tags": {
         "Name": "{{user `ami_name`}}"
       },
-      "run_tags": { 
+      "run_tags": {
         "Name": "{{user `ami_name`}}"
       },
       "run_volume_tags": {
@@ -76,7 +76,7 @@
   "provisioners": [
     {
       "type": "shell-local",
-  	  "command": "ansible-galaxy install --force -v --roles-path='./ansible/roles' --role-file='./ansible/requirements.yml'"
+      "command": "ansible-galaxy install --force -v --roles-path='./ansible/roles' --role-file='./ansible/requirements.yml'"
     },
     {
       "type": "ansible",
@@ -92,12 +92,12 @@
     },
     {
       "type": "shell-local",
-  	  "command": "export PACKER_BUILDER='virtualbox-ovf'; export VM_NAME='{{ user `vm_name` }}'; rake spec",
+      "command": "export PACKER_BUILDER='virtualbox-ovf'; export VM_NAME='{{ user `vm_name` }}'; rake spec",
       "only": ["virtualbox-ovf"]
     },
     {
       "type": "shell-local",
-  	  "command": "export PACKER_BUILDER='amazon-ebs'; export AMI_NAME='{{ user `ami_name` }}'; export SSH_PRIVATE_KEY_FILE='{{ user `ssh_private_key_file` }}'; rake spec",
+      "command": "export PACKER_BUILDER='amazon-ebs'; export AMI_NAME='{{ user `ami_name` }}'; export SSH_PRIVATE_KEY_FILE='{{ user `ssh_private_key_file` }}'; rake spec",
       "only": ["amazon-ebs"]
     }
   ],
@@ -107,11 +107,11 @@
       "output": "manifest.json",
       "strip_path": true
     },
-	{
-	  "type": "vagrant",
-	  "keep_input_artifact": true,
+    {
+      "type": "vagrant",
+      "keep_input_artifact": true,
       "output": "box/{{.Provider}}/{{user `vm_name`}}-{{user `version`}}.box",
-	  "vagrantfile_template": "{{ user `vagrantfile_template` }}"
-	}
+      "vagrantfile_template": "{{ user `vagrantfile_template` }}"
+    }
   ]
 }
