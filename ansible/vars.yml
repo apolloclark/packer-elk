@@ -1,0 +1,58 @@
+# http://docs.ansible.com/ansible/latest/playbooks_variables.html#variable-file-separation
+---
+hostname: all
+
+# geerlingguy/firewall
+firewall_allowed_tcp_ports:
+  - "22"
+  - "25"
+  - "80"
+  - "3306"
+  - "5601"
+
+
+
+# apolloclark/filebeat
+filebeat:
+ version: "5.x"
+ output:
+   elasticsearch:
+     enabled: "true"
+     hosts: '["http://localhost:9200"]'
+
+# apolloclark/metricbeat
+metricbeat:
+ version: "5.x"
+ output:
+   elasticsearch:
+     enabled: "true"
+     hosts: '["http://localhost:9200"]'
+
+# apolloclark/heartbeat
+heartbeat:
+ version: "5.x"
+ output:
+   elasticsearch:
+     enabled: "true"
+     hosts: '["http://localhost:9200"]'
+
+# apolloclark/packetbeat
+packetbeat:
+  version: "5.x"
+  protocols:
+    http:
+      enabled: "true"
+      ports: '[80,5601,9200]'
+  output:
+   elasticsearch:
+     enabled: "true"
+     hosts: '["http://localhost:9200"]'
+
+# apolloclark/elasticsearch
+elasticsearch:
+  version: "5.x"
+
+# apolloclark/kibana
+kibana:
+  version: "5.x"
+  # install_only: "true"

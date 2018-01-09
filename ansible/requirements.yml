@@ -1,0 +1,10 @@
+# http://docs.ansible.com/ansible/latest/galaxy.html#installing-multiple-roles-from-a-file
+---
+- src: geerlingguy.firewall
+- src: apolloclark.osquery            # https://github.com/apolloclark/ansible-role-osquery
+- src: apolloclark.filebeat           # https://github.com/apolloclark/ansible-role-filebeat
+- src: apolloclark.metricbeat         # https://github.com/apolloclark/ansible-role-metricbeat
+- src: apolloclark.heartbeat          # https://github.com/apolloclark/ansible-role-heartbeat
+- src: apolloclark.packetbeat         # https://github.com/apolloclark/ansible-role-packetbeat
+- src: apolloclark.elasticsearch       # https://github.com/apolloclark/ansible-role-elasticsearch
+- src: apolloclark.kibana              # https://github.com/apolloclark/ansible-role-kibana
