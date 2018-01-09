@@ -37,8 +37,8 @@ packer inspect packer.json
 packer build -only=amazon-ebs packer.json
 
 # print AMI ID
-export WEBAPP_AMI_ID=$(jq '.builds[-1].artifact_id' -r manifest.json | cut -d':' -f2);
-echo $WEBAPP_AMI_ID;
+export ELK_AMI_ID=$(jq '.builds[-1].artifact_id' -r manifest.json | cut -d':' -f2);
+echo $ELK_AMI_ID;
 
 # print total build time
 end=`date +%s`
