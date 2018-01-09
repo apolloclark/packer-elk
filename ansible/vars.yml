@@ -14,7 +14,7 @@ firewall_allowed_tcp_ports:
 
 # apolloclark/filebeat
 filebeat:
- version: "5.x"
+ version: "5.6.5"
  output:
    elasticsearch:
      enabled: "true"
@@ -22,7 +22,7 @@ filebeat:
 
 # apolloclark/metricbeat
 metricbeat:
- version: "5.x"
+ version: "5.6.5"
  output:
    elasticsearch:
      enabled: "true"
@@ -30,7 +30,7 @@ metricbeat:
 
 # apolloclark/heartbeat
 heartbeat:
- version: "5.x"
+ version: "5.6.5"
  output:
    elasticsearch:
      enabled: "true"
@@ -38,7 +38,7 @@ heartbeat:
 
 # apolloclark/packetbeat
 packetbeat:
-  version: "5.x"
+  version: "5.6.5"
   protocols:
     http:
       enabled: "true"
@@ -50,9 +50,9 @@ packetbeat:
 
 # apolloclark/elasticsearch
 elasticsearch:
-  version: "5.x"
+  version: "5.6.5"
 
 # apolloclark/kibana
 kibana:
-  version: "5.x"
+  version: "5.6.5"
   # install_only: "true"
