@@ -1,6 +1,6 @@
-# packer-aws-webapp
+# packer-aws-elk
 
-Packer based project for provisioning a "webapp" image using Ansible remote, 
+Packer based project for provisioning an "ELK" image using Ansible remote, 
 and Serverspc, for AWS, or Virtualbox, with Elastic monitoring.
 
 ## Requirements
@@ -18,38 +18,29 @@ To use this project, you must have installed:
 
 ## Deploy to AWS, with Packer
 ```shell
-git clone https://github.com/apolloclark/packer-aws-webapp
-cd packer-aws-webapp
+git clone https://github.com/apolloclark/packer-aws-elk
+cd packer-aws-elk
 # create a keypair named "packer" or change lines 26, 27 in build_packer_aws.sh
-./build_packer.sh
+./build_packer_aws.sh
 ```
 
 ## Deploy Locally, with Vagrant
 ```shell
-git clone https://github.com/apolloclark/packer-aws-webapp
-cd packer-aws-webapp
+git clone https://github.com/apolloclark/packer-aws-elk
+cd packer-aws-elk
 # change line 6 in build_packer_virtualbox.sh to a folder with an Ubuntu 16.04 ISO
 vagrant up
 vagrant ssh
-# http://127.0.0.1:8080
-```
-
-## MySQL
-```shell
-mysql -h 127.0.0.1 -u root -p
 ```
 
 ## Ansible
 
 Ansible Roles:
 - [geerlingguy.firewall](https://github.com/geerlingguy/ansible-role-firewall)
-- geerlingguy.apache
-- apolloclark.apache-modsecurity
-- apolloclark.mysql
-- apolloclark.mysql-mcafee-audit
-- apolloclark.mysql-deploy
-- geerlingguy.php-versions
-- geerlingguy.php
-- geerlingguy.apache-php-fpm
-- geerlingguy.php-mysql
-- geerlingguy.composer
+- [apolloclark.osquery](https://github.com/apolloclark/ansible-role-osquery)
+- [apolloclark.filebeat](https://github.com/apolloclark/ansible-role-filebeat)
+- [apolloclark.metricbeat](https://github.com/apolloclark/ansible-role-metricbeat)
+- [apolloclark.heartbeat](https://github.com/apolloclark/ansible-role-heartbeat)
+- [apolloclark.packetbeat](https://github.com/apolloclark/ansible-role-packetbeat)
+- [apolloclark.elasticsearch](https://github.com/apolloclark/ansible-role-elasticsearch)
+- [apolloclark.kibana](https://github.com/apolloclark/ansible-role-kibana)
