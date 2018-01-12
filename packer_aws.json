@@ -8,7 +8,6 @@
     "ssh_private_key_file": "{{env `SSH_PRIVATE_KEY_FILE`}}",
     "ami_name": "packer-aws-elk-{{isotime \"2006-01-02_15-04-06\"}}",
     "source_ami": "{{env `JAVA_AMI_ID`}}",
-    "atlas_token": "{{ env `ATLAS_TOKEN` }}",
     "hostname": "vagrant",
     "ssh_username": "ubuntu",
     "version": "{{isotime \"20060102.030405\"}}"
@@ -35,7 +34,7 @@
       "snapshot_tags": {
         "Name": "{{user `ami_name`}}"
       },
-      "ami_description": "Webapp Image, with Elastic monitoring agents",
+      "ami_description": "Webapp image, with Elastic monitoring agents",
       "associate_public_ip_address": "true",
       "vpc_id": "{{user `vpc`}}",
       "subnet_id": "{{user `subnet`}}"
