@@ -178,6 +178,15 @@ Packages = {
   },
   'osquery' => {
     version: '2.10.2-1.linux'
+  },
+  'elasticsearch' => {
+    version: '5.6.5'
+  },
+  'logstash' => {
+    version: '1:5.6.5-1'
+  },
+  'kibana' => {
+    version: '5.6.5'
   }
 }
 
@@ -187,7 +196,10 @@ InstalledServices = [
   'metricbeat',
   'heartbeat',
   'packetbeat',
-  'osqueryd'
+  'osqueryd',
+  'elasticsearch',
+  'logstash',
+  'kibana'
 ]
 
 # Define Active services
@@ -196,5 +208,8 @@ ActiveServices = [
   'metricbeat',
   'heartbeat',
   'packetbeat',
-  'osqueryd'
+  'osqueryd',
+  'elasticsearch',
+  'logstash',
+  'kibana'
 ]

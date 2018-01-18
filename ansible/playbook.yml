@@ -18,4 +18,6 @@
     - apolloclark.packetbeat
 
     - apolloclark.elasticsearch
+    - apolloclark.logstash
     - apolloclark.kibana
+    - apolloclark.beats-dashboards

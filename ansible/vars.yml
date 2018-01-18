@@ -52,7 +52,17 @@ packetbeat:
 elasticsearch:
   version: "5.6.5"
 
+# apolloclark/logstash
+logstash:
+  version: "5.6.5"
+  input_conf: "{{ playbook_dir }}/files/10-beats-input.conf"
+  filter_conf: "{{ playbook_dir }}/files/20-syslog-filter.conf"
+  output_conf: "{{ playbook_dir }}/files/30-elasticsearch-output.conf"
+
 # apolloclark/kibana
 kibana:
   version: "5.6.5"
-  # install_only: "true"
+
+# apolloclark/beats-dashboards
+beatsdashboards:
+  version: "5.6.5"
