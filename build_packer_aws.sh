@@ -11,6 +11,7 @@ export AWS_REGION="us-east-1"
 
 ### list first VPC id
 export BUILD_VPC_ID=$(aws ec2 describe-vpcs \
+  --filters 'Name=isDefault,Values=true' \
 	--query 'Vpcs[0].[VpcId]' \
 	--output text);
 echo $BUILD_VPC_ID;
