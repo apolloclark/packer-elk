@@ -9,3 +9,4 @@
 - src: apolloclark.elasticsearch      # https://github.com/apolloclark/ansible-role-elasticsearch
 - src: apolloclark.logstash           # https://github.com/apolloclark/ansible-role-logstash
 - src: apolloclark.kibana             # https://github.com/apolloclark/ansible-role-kibana
+- src: apolloclark.beats-dashboards   # https://github.com/apolloclark/ansible-role-beats-dashboards
