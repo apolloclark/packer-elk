@@ -51,8 +51,14 @@ packetbeat:
      hosts: '["http://localhost:9200"]'
 
 # apolloclark/elasticsearch
+# BINDING TO 0.0.0.0 IS DANGEROUS, UNLESS YOU ENFORCE FIREWALL RULES
+# OR USE X-PACK
 elasticsearch:
   version: "5.6.5"
+  network:
+    host: "0.0.0.0"
+    bind_host: "0.0.0.0"
+    publish_host: "_local_"
 
 # apolloclark/logstash
 logstash:
