@@ -14,13 +14,15 @@ firewall_allowed_tcp_ports:
 
 
 
+elk_ip: "127.0.0.1"
+
 # apolloclark/filebeat
 filebeat:
  version: "5.6.5"
  output:
    elasticsearch:
      enabled: "true"
-     hosts: '["http://localhost:9200"]'
+     hosts: "[\"http://{{ elk_ip }}:9200\"]"
 
 # apolloclark/metricbeat
 metricbeat:
@@ -28,7 +30,7 @@ metricbeat:
  output:
    elasticsearch:
      enabled: "true"
-     hosts: '["http://localhost:9200"]'
+     hosts: "[\"http://{{ elk_ip }}:9200\"]"
 
 # apolloclark/heartbeat
 heartbeat:
@@ -36,7 +38,7 @@ heartbeat:
  output:
    elasticsearch:
      enabled: "true"
-     hosts: '["http://localhost:9200"]'
+     hosts: "[\"http://{{ elk_ip }}:9200\"]"
 
 # apolloclark/packetbeat
 packetbeat:
@@ -48,7 +50,7 @@ packetbeat:
   output:
    elasticsearch:
      enabled: "true"
-     hosts: '["http://localhost:9200"]'
+     hosts: "[\"http://{{ elk_ip }}:9200\"]"
 
 # apolloclark/elasticsearch
 # BINDING TO 0.0.0.0 IS DANGEROUS, UNLESS YOU ENFORCE FIREWALL RULES
