@@ -24,7 +24,6 @@ Vagrant.configure(2) do |config|
         # Mac supports: rsync, nfs
         # override.vm.synced_folder host_folder.to_s, guest_folder.to_s, type: "smb"
         override.vm.synced_folder "./ansible", "/vagrant"
-        override.vm.synced_folder "./data", "/var/www/html"
             # owner: "vagrant", group: "vagrant",
             # mount_options: ['dmode=777','fmode=777']
 
