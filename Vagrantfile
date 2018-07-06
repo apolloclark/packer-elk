@@ -11,12 +11,12 @@ Vagrant.configure(2) do |config|
     config.vm.provider "virtualbox" do |vb, override|
 
         # set the VM name
-        vb.name = "packer-aws-webapp"
+        vb.name = "packer-aws-elk"
 
         # set the CPU, memory, graphics
         # @see https://www.virtualbox.org/manual/ch08.html
         vb.cpus = 1
-        vb.memory = "2048"
+        vb.memory = "4096"
         vb.gui = false
 
         # Share a folder to the guest VM, types: docker, nfs, rsync, smb, virtualbox
