@@ -90,7 +90,8 @@ tail -f /var/log/filebeat/filebeat.log
 service metricbeat status | cat
 /usr/share/metricbeat/bin/metricbeat version
 nano /etc/metricbeat/metricbeat.yml
-nano /var/log/metricbeat/metricbeat.log
+nano /var/log/metricbeat/metricbeat
+tail -f /var/log/metricbeat/metricbeat
 ```
 
 *Heartbeat*
@@ -98,17 +99,17 @@ nano /var/log/metricbeat/metricbeat.log
 service heartbeat status | cat
 /usr/share/heartbeat/bin/heartbeat version
 nano /etc/heartbeat/heartbeat.yml
-nano /var/log/heartbeat/heartbeat.log
-tail -f /var/log/heartbeat/heartbeat.log
+nano /var/log/heartbeat/heartbeat
+tail -f /var/log/heartbeat/heartbeat
 ```
 
 *Packetbeat*
 ```
 service packetbeat status | cat
-/usr/share/heartbeat/bin/heartbeat version
-nano /etc/heartbeat/heartbeat.yml
-nano /var/log/heartbeat/heartbeat.log
-tail -f /var/log/heartbeat/heartbeat.log
+/usr/share/packetbeat/bin/packetbeat version
+nano /etc/packetbeat/packetbeat.yml
+nano /var/log/packetbeat/packetbeat
+tail -f /var/log/packetbeat/packetbeat
 ```
 
 *Auditbeat*
@@ -136,12 +137,21 @@ tail -f /var/log/logstash/logstash-plain.log
 
 service elasticsearch status
 /usr/share/elasticsearch/bin/elasticsearch --version
+/usr/share/elasticsearch/bin/elasticsearch-plugin -h
+/usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-geoip -b
 nano /etc/elasticsearch/elasticsearch.yml
 nano /var/log/elasticsearch/elasticsearch.log
 tail -f /var/log/elasticsearch/elasticsearch.log
 
 # list indices
-curl -XGET 'http://127.0.0.1:9200/_cat/indices?v'
+curl -s -XGET 'http://127.0.0.1:9200/_cat/indices?v'
+
+# list documents in a given index
+curl -s -XGET 'http://127.0.0.1:9200/filebeat-*/_search?q=system.syslog.message:*&size=10000'
+
+# list documents in a given index, parse results
+curl -s -XGET 'http://127.0.0.1:9200/filebeat-*/_search?q=source:\/var\/log\/auth.log&size=10000' | \
+  jq '.hits.hits[]._source | select (.!=null)'
 ```
 
 *Kibana*
