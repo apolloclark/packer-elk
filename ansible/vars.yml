@@ -12,66 +12,148 @@ firewall_allowed_tcp_ports:
   - "9200"
   - "9300"
 
+# geerlingguy/java
+java_packages:
+  - openjdk-8-jre
 
 
-elk_ip: "127.0.0.1"
 
-# apolloclark/filebeat
-filebeat:
- version: "5.6.5"
- output:
-   elasticsearch:
-     enabled: "true"
-     hosts: "[\"http://{{ elk_ip }}:9200\"]"
+es_ip: "127.0.0.1"
+logstash_ip: "127.0.0.1"
+kibana_ip: "127.0.0.1"
 
-# apolloclark/metricbeat
-metricbeat:
- version: "5.6.5"
- output:
-   elasticsearch:
-     enabled: "true"
-     hosts: "[\"http://{{ elk_ip }}:9200\"]"
+
+     
+
 
 # apolloclark/heartbeat
 heartbeat:
- version: "5.6.5"
- output:
-   elasticsearch:
-     enabled: "true"
-     hosts: "[\"http://{{ elk_ip }}:9200\"]"
+  version: "6.3.2"
+  monitors:
+    http:
+      schedule: "'@every 5s'"
+      urls: '["http://localhost:80", "http://localhost:5601"]'
+  output:
+    elasticsearch:
+      enabled: false
+      hosts:
+       - "{{ es_ip }}:9200"
+    logstash:
+      enabled: true
+      hosts:
+       - "{{ logstash_ip }}:5044"
+  setup:
+    dashboards:
+      enabled: true
+    template:
+      enabled: true
+    kibana:
+      host: "{{ kibana_ip }}:5601"
+
+# apolloclark/metricbeat
+metricbeat:
+  version: "6.3.2"
+  output:
+    elasticsearch:
+      enabled: false
+      hosts:
+       - "{{ es_ip }}:9200"
+    logstash:
+      enabled: true
+      hosts:
+       - "{{ logstash_ip }}:5044"
+  setup:
+    dashboards:
+      enabled: true
+    template:
+      enabled: true
+    kibana:
+      host: "{{ kibana_ip }}:5601"
 
 # apolloclark/packetbeat
 packetbeat:
-  version: "5.6.5"
+  version: "6.3.2"
   protocols:
     http:
-      enabled: "true"
+      enabled: true
       ports: '[80,5601,9200]'
   output:
-   elasticsearch:
-     enabled: "true"
-     hosts: "[\"http://{{ elk_ip }}:9200\"]"
+    elasticsearch:
+      enabled: false
+      hosts:
+       - "{{ es_ip }}:9200"
+    logstash:
+      enabled: true
+      hosts:
+       - "{{ logstash_ip }}:5044"
+  setup:
+    dashboards:
+      enabled: true
+    template:
+      enabled: true
+    kibana:
+      host: "{{ kibana_ip }}:5601"
+
+# apolloclark/filebeat
+filebeat:
+  version: "6.3.2"
+  output:
+    elasticsearch:
+      enabled: false
+      hosts:
+       - "{{ es_ip }}:9200"
+    logstash:
+      enabled: true
+      hosts:
+       - "{{ logstash_ip }}:5044"
+  setup:
+    dashboards:
+      enabled: true
+    template:
+      enabled: true
+    kibana:
+      host: "{{ kibana_ip }}:5601"
+
+# apolloclark/auditbeat
+auditbeat:
+  version: "6.3.2"
+  output:
+    elasticsearch:
+      enabled: false
+      hosts:
+       - "{{ es_ip }}:9200"
+    logstash:
+      enabled: true
+      hosts:
+       - "{{ logstash_ip }}:5044"
+  setup:
+    dashboards:
+      enabled: true
+    template:
+      enabled: true
+    kibana:
+      host: "{{ kibana_ip }}:5601"
 
 # apolloclark/elasticsearch
 # BINDING TO 0.0.0.0 IS DANGEROUS, UNLESS YOU ENFORCE FIREWALL RULES
 # OR USE X-PACK
 elasticsearch:
-  version: "5.6.5"
+  version: "6.3.2"
   network:
     host: "0.0.0.0"
     bind_host: "0.0.0.0"
     publish_host: "_local_"
-
+      
 # apolloclark/logstash
 logstash:
-  version: "5.6.5"
+  version: "6.3.2"
   input_conf: "{{ playbook_dir }}/files/10-beats-input.conf"
   filter_conf: "{{ playbook_dir }}/files/20-syslog-filter.conf"
   output_conf: "{{ playbook_dir }}/files/30-elasticsearch-output.conf"
 
 # apolloclark/kibana
 kibana:
-  version: "5.6.5"
+  version: "6.3.2"
 
 # apolloclark/beats-dashboards
 beatsdashboards:
