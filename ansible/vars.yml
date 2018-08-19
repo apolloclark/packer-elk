@@ -7,6 +7,7 @@ firewall_allowed_tcp_ports:
   - "22"
   - "25"
   - "80"
+  - "2181"
   - "5044"
   - "5601"
   - "9200"
@@ -19,12 +20,18 @@ java_packages:
 
 
 es_ip: "127.0.0.1"
+kafka_ip: "127.0.0.1"
 logstash_ip: "127.0.0.1"
 kibana_ip: "127.0.0.1"
 
 
      
 
+
+# apolloclark/kafka
+kafka:
+  version: "2.0.0"
+  scala_version: "2.11"
 
 # apolloclark/heartbeat
 heartbeat:
@@ -39,9 +46,13 @@ heartbeat:
       hosts:
        - "{{ es_ip }}:9200"
     logstash:
-      enabled: true
+      enabled: false
       hosts:
        - "{{ logstash_ip }}:5044"
+    kafka:
+      enabled: true
+      hosts:
+       - "{{ kafka_ip }}:9092"
   setup:
     dashboards:
       enabled: true
@@ -59,9 +70,13 @@ metricbeat:
       hosts:
        - "{{ es_ip }}:9200"
     logstash:
-      enabled: true
+      enabled: false
       hosts:
        - "{{ logstash_ip }}:5044"
+    kafka:
+      enabled: true
+      hosts:
+       - "{{ kafka_ip }}:9092"
   setup:
     dashboards:
       enabled: true
@@ -83,9 +98,13 @@ packetbeat:
       hosts:
        - "{{ es_ip }}:9200"
     logstash:
-      enabled: true
+      enabled: false
       hosts:
        - "{{ logstash_ip }}:5044"
+    kafka:
+      enabled: true
+      hosts:
+       - "{{ kafka_ip }}:9092"
   setup:
     dashboards:
       enabled: true
@@ -103,9 +122,13 @@ filebeat:
       hosts:
        - "{{ es_ip }}:9200"
     logstash:
-      enabled: true
+      enabled: false
       hosts:
        - "{{ logstash_ip }}:5044"
+    kafka:
+      enabled: true
+      hosts:
+       - "{{ kafka_ip }}:9092"
   setup:
     dashboards:
       enabled: true
@@ -123,9 +146,13 @@ auditbeat:
       hosts:
        - "{{ es_ip }}:9200"
     logstash:
-      enabled: true
+      enabled: false
       hosts:
        - "{{ logstash_ip }}:5044"
+    kafka:
+      enabled: true
+      hosts:
+       - "{{ kafka_ip }}:9092"
   setup:
     dashboards:
       enabled: true
@@ -143,6 +170,8 @@ elasticsearch:
     host: "0.0.0.0"
     bind_host: "0.0.0.0"
     publish_host: "_local_"
+  action:
+    destructive_requires_name: false
       
 # apolloclark/logstash
 logstash:

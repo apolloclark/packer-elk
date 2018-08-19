@@ -12,9 +12,9 @@
     - geerlingguy.firewall
     - geerlingguy.git
     - apolloclark.nano-highlighting
-
-    - apolloclark.osquery
     - geerlingguy.java
+    - apolloclark.zookeeper
+    - apolloclark.kafka
     - apolloclark.elasticsearch
     - apolloclark.logstash
     - apolloclark.kibana
@@ -23,3 +23,4 @@
     - apolloclark.packetbeat
     - apolloclark.metricbeat
     - apolloclark.heartbeat
+    - apolloclark.osquery
