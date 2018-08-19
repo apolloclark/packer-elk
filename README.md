@@ -121,6 +121,39 @@ nano /var/log/auditbeat/auditbeat
 tail -f /var/log/auditbeat/auditbeat
 ```
 
+*Kafka*
+```
+service kafka status | cat
+find ./libs/ -name \*kafka_\* | head -1 | grep -o '\kafka[^\n]*'
+nano /etc/kafka/config/server.properties
+nano /etc/kafka/logs/server.log
+tail -f /etc/kafka/logs/server.log
+
+# https://gist.github.com/vkroz/05136cefdbb4fa61296993db17e1ae3f
+
+# create a topic
+/etc/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+
+# list topics
+/etc/kafka/bin/kafka-topics.sh --list --zookeeper localhost:2181
+
+# write a message to a topic
+/etc/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+
+# read a message from a topic
+/etc/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+
+# list consumers groups
+/etc/kafka/bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+
+# check number of messages in a topic
+/etc/kafka/bin/kafka-run-class.sh kafka.tools.GetOffsetShell \
+  --broker-list localhost:9092 \
+  --topic filebeat --time -1 --offsets 1 \
+  | awk -F  ":" '{sum += $3} END {print sum}'
+
+```
+
 *Logstash*
 ```
 service logstash status | cat
@@ -152,6 +185,9 @@ curl -s -XGET 'http://127.0.0.1:9200/filebeat-*/_search?q=system.syslog.message:
 # list documents in a given index, parse results
 curl -s -XGET 'http://127.0.0.1:9200/filebeat-*/_search?q=source:\/var\/log\/auth.log&size=10000' | \
   jq '.hits.hits[]._source | select (.!=null)'
+  
+# delete index
+curl -s -XDELETE 'http://127.0.0.1:9200/auditbeat-*/'
 ```
 
 *Kibana*
