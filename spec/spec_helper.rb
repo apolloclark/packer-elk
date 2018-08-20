@@ -164,14 +164,32 @@ end
 
 # Define packages
 Packages = {
+  'filebeat' => {
+    version: '6.3.2'
+  },
+  'metricbeat' => {
+    version: '6.3.2'
+  },
+  'heartbeat-elastic' => {
+    version: '6.3.2'
+  },
+  'packetbeat' => {
+    version: '6.3.2'
+  },
+  'auditbeat' => {
+    version: '6.3.2'
+  },
   'elasticsearch' => {
-    version: '5.6.5'
+    version: '6.3.2'
   },
   'logstash' => {
-    version: '1:5.6.5-1'
+    version: '1:6.3.2-1'
   },
   'kibana' => {
-    version: '5.6.5'
+    version: '6.3.2'
+  },
+  'osquery' => {
+    version: '2.11.0-1.linux'
   }
 }
 
@@ -179,22 +197,24 @@ Packages = {
 InstalledServices = [
   'filebeat',
   'metricbeat',
-  'heartbeat',
+  'heartbeat-elastic',
   'packetbeat',
-  'osqueryd',
+  'auditbeat',
   'elasticsearch',
   'logstash',
-  'kibana'
+  'kibana',
+  'osqueryd'
 ]
 
 # Define Active services
 ActiveServices = [
   'filebeat',
   'metricbeat',
-  'heartbeat',
+  'heartbeat-elastic',
   'packetbeat',
-  'osqueryd',
+  'auditbeat',
   'elasticsearch',
   'logstash',
-  'kibana'
+  'kibana',
+  'osqueryd'
 ]

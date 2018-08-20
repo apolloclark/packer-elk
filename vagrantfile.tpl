@@ -3,29 +3,20 @@
 
 Vagrant.configure(2) do |config|
 
-    # Ubuntu 16.04 Xenial LTS 64-bit
-    config.vm.box = "apolloclark/ubuntu16.04"
-    # config.vm.box_version = "20170926"
+    # Ubuntu 16.04 Xenial LTS 64-bit, Elastic
+    config.vm.box = "apolloclark/ubuntu16.04-elk"
 
     # VirtualBox Provider-specific configuration
     config.vm.provider "virtualbox" do |vb, override|
 
         # set the VM name
-        vb.name = "packer-aws-elk"
+        vb.name = "ubuntu16.04-elk"
 
         # set the CPU, memory, graphics
         # @see https://www.virtualbox.org/manual/ch08.html
         vb.cpus = 1
         vb.memory = "4096"
         vb.gui = false
-
-        # Share a folder to the guest VM, types: docker, nfs, rsync, smb, virtualbox
-        # Windows supports: smb
-        # Mac supports: rsync, nfs
-        # override.vm.synced_folder host_folder.to_s, guest_folder.to_s, type: "smb"
-        override.vm.synced_folder "./ansible", "/vagrant"
-            # owner: "vagrant", group: "vagrant",
-            # mount_options: ['dmode=777','fmode=777']
 
         # Create a forwarded port mapping which allows access to a specific port
         # within the machine from a port on the host machine. In the example below,
@@ -42,13 +33,5 @@ Vagrant.configure(2) do |config|
             # More info on the "Usage" link above
             override.cache.scope = :box
         end
-    end
-      
-    # Configure the box with Ansible, running from the Host machine
-    # https://www.vagrantup.com/docs/provisioning/ansible.html
-    # https://www.vagrantup.com/docs/provisioning/ansible_common.html
-    config.vm.provision "ansible" do |ansible|
-        ansible.galaxy_role_file = "./ansible/requirements.yml"
-        ansible.playbook = "./ansible/playbook.yml"
     end
 end
