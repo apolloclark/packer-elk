@@ -22,9 +22,12 @@ Vagrant.configure(2) do |config|
         # within the machine from a port on the host machine. In the example below,
         # accessing "localhost:8080" will access port 80 on the guest machine.
         # https://www.vagrantup.com/docs/networking/forwarded_ports.html
-        override.vm.network "forwarded_port", guest: 80,   host: 8080, auto_correct: true
-        override.vm.network "forwarded_port", guest: 3306, host: 3306, auto_correct: true
+        override.vm.network "forwarded_port", guest: 2181, host: 2181, auto_correct: true
+        override.vm.network "forwarded_port", guest: 5044, host: 5044, auto_correct: true
         override.vm.network "forwarded_port", guest: 5601, host: 5601, auto_correct: true
+        override.vm.network "forwarded_port", guest: 9092, host: 9092, auto_correct: true
+        override.vm.network "forwarded_port", guest: 9200, host: 9200, auto_correct: true
+        override.vm.network "forwarded_port", guest: 9300, host: 9300, auto_correct: true
 
         # setup local apt-get cache
         if Vagrant.has_plugin?("vagrant-cachier")
