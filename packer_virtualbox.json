@@ -56,23 +56,19 @@
     }
   ],
   "post-processors": [
-    {
-      "type": "manifest",
-      "output": "manifest.json",
-      "strip_path": true
-    },
-    {
-      "type": "vagrant",
-      "keep_input_artifact": true,
-      "output": "box/{{.Provider}}/{{user `vm_name`}}-{{user `version`}}.box",
-      "vagrantfile_template": "{{ user `vagrantfile_template` }}"
-    },
-	{
-	  "type": "vagrant-cloud",
-	  "box_tag": "{{user `atlas_box_tag`}}",
-	  "access_token": "{{user `atlas_token`}}",
-	  "no_release": "true",
-	  "version": "{{user `version`}}"
-	}
+    [
+      {
+        "type": "vagrant",
+        "output": "box/{{.Provider}}/{{user `vm_name`}}-{{user `version`}}.box",
+        "vagrantfile_template": "{{ user `vagrantfile_template` }}"
+      },
+	  {
+	    "type": "vagrant-cloud",
+	    "box_tag": "{{user `atlas_box_tag`}}",
+	    "access_token": "{{user `atlas_token`}}",
+	    "no_release": "true",
+	    "version": "{{user `version`}}"
+	  }
+	]
   ]
 }
