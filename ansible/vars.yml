@@ -7,12 +7,12 @@ firewall_allowed_tcp_ports:
   - "22"
   - "25"
   - "80"
-  - "2181"
-  - "5044"
-  - "5601"
-  - "9092"
-  - "9200"
-  - "9300"
+  - "2181" # Zookeeper
+  - "5044" # Logstash
+  - "5601" # Kibana
+  - "9092" # Kafka
+  - "9200" # Elasticsearch
+  - "9300" # Elasticsearch
 
 # geerlingguy/java
 java_packages:
