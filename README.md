@@ -42,6 +42,8 @@ Ansible Roles:
 - [apolloclark.heartbeat](https://github.com/apolloclark/ansible-role-heartbeat)
 - [apolloclark.packetbeat](https://github.com/apolloclark/ansible-role-packetbeat)
 - [apolloclark.auditbeat](https://github.com/apolloclark/ansible-role-auditbeat)
+- [apolloclark.zookeeper](https://github.com/apolloclark/ansible-role-zookeeper)
+- [apolloclark.kafka](https://github.com/apolloclark/ansible-role-kafka)
 - [apolloclark.logstash](https://github.com/apolloclark/ansible-role-logstash)
 - [apolloclark.elasticsearch](https://github.com/apolloclark/ansible-role-elasticsearch)
 - [apolloclark.kibana](https://github.com/apolloclark/ansible-role-kibana)
