@@ -39,7 +39,7 @@ kafka:
 
 # apolloclark/heartbeat
 heartbeat:
-  version: "6.3.2"
+  version: "6.4.0"
   monitors:
     http:
       schedule: "'@every 5s'"
@@ -49,10 +49,6 @@ heartbeat:
       enabled: false
       hosts:
        - "{{ es_ip }}:9200"
-    logstash:
-      enabled: false
-      hosts:
-       - "{{ logstash_ip }}:5044"
     kafka:
       enabled: true
       hosts:
@@ -67,16 +63,12 @@ heartbeat:
 
 # apolloclark/metricbeat
 metricbeat:
-  version: "6.3.2"
+  version: "6.4.0"
   output:
     elasticsearch:
       enabled: false
       hosts:
        - "{{ es_ip }}:9200"
-    logstash:
-      enabled: false
-      hosts:
-       - "{{ logstash_ip }}:5044"
     kafka:
       enabled: true
       hosts:
@@ -91,7 +83,7 @@ metricbeat:
 
 # apolloclark/packetbeat
 packetbeat:
-  version: "6.3.2"
+  version: "6.4.0"
   protocols:
     http:
       enabled: true
@@ -101,10 +93,6 @@ packetbeat:
       enabled: false
       hosts:
        - "{{ es_ip }}:9200"
-    logstash:
-      enabled: false
-      hosts:
-       - "{{ logstash_ip }}:5044"
     kafka:
       enabled: true
       hosts:
@@ -119,16 +107,12 @@ packetbeat:
 
 # apolloclark/filebeat
 filebeat:
-  version: "6.3.2"
+  version: "6.4.0"
   output:
     elasticsearch:
       enabled: false
       hosts:
        - "{{ es_ip }}:9200"
-    logstash:
-      enabled: false
-      hosts:
-       - "{{ logstash_ip }}:5044"
     kafka:
       enabled: true
       hosts:
@@ -143,16 +127,12 @@ filebeat:
 
 # apolloclark/auditbeat
 auditbeat:
-  version: "6.3.2"
+  version: "6.4.0"
   output:
     elasticsearch:
       enabled: false
       hosts:
        - "{{ es_ip }}:9200"
-    logstash:
-      enabled: false
-      hosts:
-       - "{{ logstash_ip }}:5044"
     kafka:
       enabled: true
       hosts:
@@ -169,7 +149,7 @@ auditbeat:
 # BINDING TO 0.0.0.0 IS DANGEROUS, UNLESS YOU ENFORCE FIREWALL RULES
 # OR USE X-PACK
 elasticsearch:
-  version: "6.3.2"
+  version: "6.4.0"
   network:
     host: "0.0.0.0"
     bind_host: "0.0.0.0"
@@ -179,15 +159,11 @@ elasticsearch:
       
 # apolloclark/logstash
 logstash:
-  version: "6.3.2"
+  version: "6.4.0"
   input_conf: "{{ playbook_dir }}/files/10-beats-input.conf"
   filter_conf: "{{ playbook_dir }}/files/20-syslog-filter.conf"
   output_conf: "{{ playbook_dir }}/files/30-elasticsearch-output.conf"
 
 # apolloclark/kibana
 kibana:
-  version: "6.3.2"
-
-# apolloclark/beats-dashboards
-beatsdashboards:
-  version: "5.6.5"
+  version: "6.4.0"
