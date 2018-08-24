@@ -51,6 +51,16 @@
       "playbook_file": "./ansible/playbook.yml"
     },
     {
+	  "type": "file",
+	  "source": "restart_elk_services.sh",
+	  "destination": "/home/vagrant/restart_elk_services.sh"
+	},
+    {
+	  "type": "file",
+	  "source": "check_elk_services.sh",
+	  "destination": "/home/vagrant/check_elk_services.sh"
+	},
+    {
       "type": "shell-local",
       "command": "export PACKER_BUILDER='virtualbox-ovf'; export VM_NAME='{{ user `vm_name` }}'; rake spec"
     }
@@ -59,6 +69,7 @@
     [
       {
         "type": "vagrant",
+        "keep_input_artifact": true,
         "output": "box/{{.Provider}}/{{user `vm_name`}}-{{user `version`}}.box",
         "vagrantfile_template": "{{ user `vagrantfile_template` }}"
       },

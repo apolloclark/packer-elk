@@ -15,3 +15,4 @@
 - src: apolloclark.filebeat           # https://github.com/apolloclark/ansible-role-filebeat
 - src: apolloclark.auditbeat          # https://github.com/apolloclark/ansible-role-auditbeat
 - src: apolloclark.osquery            # https://github.com/apolloclark/ansible-role-osquery
+- src: apolloclark.crontab            # https://github.com/apolloclark/ansible-role-crontab

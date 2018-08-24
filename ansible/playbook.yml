@@ -24,3 +24,4 @@
     - apolloclark.metricbeat
     - apolloclark.heartbeat
     - apolloclark.osquery
+    - apolloclark.crontab

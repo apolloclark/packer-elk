@@ -26,8 +26,11 @@ logstash_ip: "127.0.0.1"
 kibana_ip: "127.0.0.1"
 
 
-     
 
+# apolloclark/crontab
+crontab:
+  global:
+    - "@reboot root /home/vagrant/restart_elk_services.sh"
 
 # apolloclark/kafka
 kafka:
