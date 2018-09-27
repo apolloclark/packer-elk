@@ -11,7 +11,7 @@
   roles:
     - geerlingguy.firewall
     - geerlingguy.git
-    - apolloclark.nano-highlighting
+    - apolloclark.nano_highlighting
     - geerlingguy.java
     - apolloclark.zookeeper
     - apolloclark.kafka

@@ -162,7 +162,7 @@ end
 
 
 
-# Define packages
+# Define installed packages
 Packages = {
   'filebeat' => {
     version: '6.4.0'
@@ -193,28 +193,8 @@ Packages = {
   }
 }
 
-# Define Installed services
-InstalledServices = [
-  'filebeat',
-  'metricbeat',
-  'heartbeat-elastic',
-  'packetbeat',
-  'auditbeat',
-  'elasticsearch',
-  'logstash',
-  'kibana',
-  'osqueryd'
-]
+# Define auto-start services
+InstalledServices = []
 
-# Define Active services
-ActiveServices = [
-  'filebeat',
-  'metricbeat',
-  'heartbeat-elastic',
-  'packetbeat',
-  'auditbeat',
-  'elasticsearch',
-  'logstash',
-  'kibana',
-  'osqueryd'
-]
+# Define active services
+ActiveServices = []
