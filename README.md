@@ -19,7 +19,7 @@ To use this project, you must have installed:
 ## Deploy to AWS, with Packer
 ```shell
 git clone https://github.com/apolloclark/packer-aws-elk
-cd packer-aws-elk
+cd ./packer-aws-elk/config
 # create a keypair named "packer" or change lines 26, 27 in build_packer_aws.sh
 ./build_packer_aws.sh
 ```
@@ -27,7 +27,7 @@ cd packer-aws-elk
 ## Deploy Locally, with Vagrant
 ```shell
 git clone https://github.com/apolloclark/packer-aws-elk
-cd packer-aws-elk
+cd ./packer-aws-elk/config
 vagrant up
 vagrant ssh
 ```
@@ -37,11 +37,11 @@ vagrant ssh
 Ansible Roles:
 - [geerlingguy.firewall](https://github.com/geerlingguy/ansible-role-firewall)
 - [apolloclark.osquery](https://github.com/apolloclark/ansible-role-osquery)
-- [apolloclark.filebeat](https://github.com/apolloclark/ansible-role-filebeat)
-- [apolloclark.metricbeat](https://github.com/apolloclark/ansible-role-metricbeat)
-- [apolloclark.heartbeat](https://github.com/apolloclark/ansible-role-heartbeat)
-- [apolloclark.packetbeat](https://github.com/apolloclark/ansible-role-packetbeat)
 - [apolloclark.auditbeat](https://github.com/apolloclark/ansible-role-auditbeat)
+- [apolloclark.filebeat](https://github.com/apolloclark/ansible-role-filebeat)
+- [apolloclark.heartbeat](https://github.com/apolloclark/ansible-role-heartbeat)
+- [apolloclark.metricbeat](https://github.com/apolloclark/ansible-role-metricbeat)
+- [apolloclark.packetbeat](https://github.com/apolloclark/ansible-role-packetbeat)
 - [apolloclark.zookeeper](https://github.com/apolloclark/ansible-role-zookeeper)
 - [apolloclark.kafka](https://github.com/apolloclark/ansible-role-kafka)
 - [apolloclark.logstash](https://github.com/apolloclark/ansible-role-logstash)
@@ -56,19 +56,6 @@ Ansible Roles:
 *authlog*
 ```
 nano /var/log/auth.log
-```
-
-*apache*
-```
-service apache2 status | cat
-nano /var/log/apache2/access.log
-nano /var/log/apache2/audit.log
-nano /var/log/apache2/error.log
-```
-
-*mysql*
-```
-nano /var/log/mysql/audit.log
 ```
 
 *osquery*
