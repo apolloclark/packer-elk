@@ -10,8 +10,6 @@
     - "vars.yml"
   roles:
     - geerlingguy.firewall
-    - geerlingguy.git
-    - apolloclark.nano_highlighting
     - geerlingguy.java
     - apolloclark.zookeeper
     - apolloclark.kafka
