@@ -2,7 +2,7 @@ require 'serverspec'
 require 'net/ssh'
 require 'tempfile'
 
-set :backend, :ssh
+set :backend, :exec
 
 if ENV['ASK_SUDO_PASSWORD']
   begin
@@ -24,29 +24,33 @@ puts "host =  '#{host}'"
 
 
 # check if a Vagrant machine is running
-vagrant_status = `vagrant status`
-if match = /running/.match(vagrant_status)
-  puts "vagrant machine is running..."
-  
-  # check if this is a manual serverspec run
-  vagrant_run = ENV['VAGRANT_INSTALLER_VERSION'] || 'none'
-  if vagrant_run != "2"
+begin
+  vagrant_status = `vagrant status`
+  if match = /running/.match(vagrant_status)
+    puts "vagrant machine is running..."
     
-    puts "vagrant, manual serverspec run..."
-    host = "default"
-  
-    # retrieve the vagrant ssh config
-    config = Tempfile.new('', Dir.tmpdir)
-    config.write(`vagrant ssh-config #{host}`)
-    config.close
+    # check if this is a manual serverspec run
+    vagrant_run = ENV['VAGRANT_INSTALLER_VERSION'] || 'none'
+    if vagrant_run != "2"
+      
+      puts "vagrant, manual serverspec run..."
+      host = "default"
     
-    # configure the SSH connection for serverspec
-    options = Net::SSH::Config.for(host, [config.path])
-    options[:user] ||= Etc.getlogin
-    set :host,        options[:host_name] || host
-    set :ssh_options, options
-    # p options, host
+      # retrieve the vagrant ssh config
+      config = Tempfile.new('', Dir.tmpdir)
+      config.write(`vagrant ssh-config #{host}`)
+      config.close
+      
+      # configure the SSH connection for serverspec
+      options = Net::SSH::Config.for(host, [config.path])
+      options[:user] ||= Etc.getlogin
+      set :host,        options[:host_name] || host
+      set :ssh_options, options
+      set :backend, :ssh
+    end
   end
+rescue Errno::ENOENT => e
+  puts 'Rescued by Errno::ENOENT statement.'
 end
 
 
@@ -101,6 +105,7 @@ if packer_status != 'none'
   
     set :host, host
     set :ssh_options, options
+    set :backend, :ssh
     p options, host, ssh_port
     
   # check for an amazon-ebs run
@@ -144,6 +149,7 @@ if packer_status != 'none'
   
     set :host, host
     set :ssh_options, options
+    set :backend, :ssh
     # p ami_name, aws_ip, options, host, ssh_private_key_file
   end
 end

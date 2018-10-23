@@ -168,7 +168,7 @@ end
 
 
 
-# Define packages
+# Define installed packages
 Packages = {
   'filebeat' => {
     version: '6.4.0'
