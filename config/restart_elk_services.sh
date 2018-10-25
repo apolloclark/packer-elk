@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -eux
 
 sleep 30s
 service elasticsearch restart
