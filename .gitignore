@@ -2,12 +2,13 @@
 .vagrant
 .rspec
 manifest.json
+manifest.json.lock
 vagrant.json
 Gemfile.lock
 composer.lock
 
 **/ansible/roles/*
 **/playbook.retry
-box/*
-output*/*
-packer_cache/*
+**/box/*
+**/output*/*
+**/packer_cache/*
