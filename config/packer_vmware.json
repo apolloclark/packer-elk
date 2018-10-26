@@ -11,15 +11,15 @@
     "source_path": "../../packer-aws-java/output/vmware/ubuntu1604-java.vmx",
     "ssh_password": "vagrant",
     "ssh_username": "vagrant",
-    "vagrantfile_template": "",
+    "vagrantfile_template": "vagrantfile.tpl",
     "vm_name": "ubuntu1604-elk",
-    "version": "{{isotime \"20060102.030405\"}}"
+    "version": "{{isotime \"20060102.030405\"}}",
+    "version_simple": "{{isotime \"20060102\"}}"
   },
   "builders": [
     {
       "type": "vmware-vmx",
       "source_path": "{{ user `source_path` }}",
-      "output_directory": "output/vmware",
       "headless": "{{ user `headless` }}",
       "output_directory": "output/vmware",
       "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
@@ -27,7 +27,6 @@
       "ssh_username": "{{ user `ssh_username` }}",
       "ssh_wait_timeout": "600s",
       "tools_upload_flavor": "linux",
-      "vm_name": "{{ user `vm_name` }}",
       "vmx_data": {
         "memsize": "{{ user `memory` }}",
         "numvcpus": "{{ user `cpus` }}",
@@ -46,6 +45,24 @@
       "playbook_dir": "./ansible",
       "galaxy_file": "./ansible/requirements.yml",
       "playbook_file": "./ansible/playbook.yml"
+    },
+    {
+	  "type": "file",
+	  "source": "restart_elk_services.sh",
+	  "destination": "/home/vagrant/restart_elk_services.sh"
+	},
+    {
+	  "type": "file",
+	  "source": "check_elk_services.sh",
+	  "destination": "/home/vagrant/check_elk_services.sh"
+	},
+    {
+      "type": "shell",
+      "execute_command": "echo '{{ user `ssh_password` }}' | sudo -E -S bash '{{.Path}}'",
+      "scripts": [
+        "restart_elk_services.sh",
+        "check_elk_services.sh"
+      ]
     },
     {
       "type": "shell",
@@ -67,16 +84,25 @@
     }
   ],
   "post-processors": [
-    {
-      "type": "manifest",
-      "output": "manifest.json",
-      "strip_path": true
-    },
-    {
-      "type": "vagrant",
-      "keep_input_artifact": true,
-      "output": "box/{{.Provider}}/{{user `vm_name`}}-{{user `version`}}.box",
-      "vagrantfile_template": "{{ user `vagrantfile_template` }}"
-    }
+    [
+      {
+        "type": "manifest",
+        "output": "manifest.json",
+        "strip_path": true
+      },
+      {
+        "type": "vagrant",
+        "keep_input_artifact": true,
+        "output": "box/{{.Provider}}/{{user `vm_name`}}-{{user `version_simple`}}.box",
+        "vagrantfile_template": "{{ user `vagrantfile_template` }}"
+      },
+	  {
+	    "type": "vagrant-cloud",
+	    "box_tag": "{{user `atlas_box_tag`}}",
+	    "access_token": "{{user `atlas_token`}}",
+	    "no_release": "true",
+	    "version": "{{user `version_simple`}}"
+	  }
+	]
   ]
 }

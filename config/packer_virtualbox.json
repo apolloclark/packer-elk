@@ -7,12 +7,14 @@
     "headless": "true",
     "memory": "4096",
     "hostname": "vagrant",
-    "source_path": "../packer-aws-java/output/vbox/ubuntu1604-java.ovf",
+    "project_name": "packer-aws-elk",
+    "source_path": "../../packer-aws-java/output/vbox/ubuntu1604-java.ovf",
     "ssh_password": "vagrant",
     "ssh_username": "vagrant",
     "vagrantfile_template": "vagrantfile.tpl",
     "vm_name": "ubuntu1604-elk",
-    "version": "{{isotime \"20060102.030405\"}}"
+    "version": "{{isotime \"20060102.030405\"}}",
+    "version_simple": "{{isotime \"20060102\"}}"
   },
   "builders": [
     {
@@ -42,12 +44,9 @@
   ],
   "provisioners": [
     {
-      "type": "shell-local",
-      "command": "ansible-galaxy install --force -v --roles-path='./ansible/roles' --role-file='./ansible/requirements.yml'"
-    },
-    {
-      "type": "ansible",
-      "user": "{{ user `ansible_user` }}",
+      "type": "ansible-local",
+      "playbook_dir": "./ansible",
+      "galaxy_file": "./ansible/requirements.yml",
       "playbook_file": "./ansible/playbook.yml"
     },
     {
@@ -61,12 +60,39 @@
 	  "destination": "/home/vagrant/check_elk_services.sh"
 	},
     {
-      "type": "shell-local",
-      "command": "export PACKER_BUILDER='virtualbox-ovf'; export VM_NAME='{{ user `vm_name` }}'; rake spec"
+      "type": "shell",
+      "execute_command": "echo '{{ user `ssh_password` }}' | sudo -E -S bash '{{.Path}}'",
+      "scripts": [
+        "restart_elk_services.sh",
+        "check_elk_services.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "mkdir -p /home/vagrant/{{ user `project_name` }}/serverspec"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "./serverspec",
+      "destination": "/home/vagrant/{{ user `project_name` }}"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "cd /home/vagrant/{{ user `project_name` }}/serverspec",
+        "rake spec"
+      ]
     }
   ],
   "post-processors": [
     [
+      {
+        "type": "manifest",
+        "output": "manifest.json",
+        "strip_path": true
+      },
       {
         "type": "vagrant",
         "keep_input_artifact": true,
@@ -78,7 +104,7 @@
 	    "box_tag": "{{user `atlas_box_tag`}}",
 	    "access_token": "{{user `atlas_token`}}",
 	    "no_release": "true",
-	    "version": "{{user `version`}}"
+	    "version": "{{user `version_simple`}}"
 	  }
 	]
   ]
