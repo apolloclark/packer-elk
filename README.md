@@ -24,7 +24,7 @@ cd ./packer-aws-elk/config
 ./build_packer_aws.sh
 ```
 
-## Deploy Locally, with Vagrant
+## Deploy to Virtualbox, with Vagrant
 ```shell
 git clone https://github.com/apolloclark/packer-aws-elk
 cd ./packer-aws-elk/config
