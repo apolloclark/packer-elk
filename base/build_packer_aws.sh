@@ -23,6 +23,12 @@ export BUILD_SUBNET_ID=$(aws ec2 describe-subnets \
 	--output text);
 echo $BUILD_SUBNET_ID;
 
+### set JAVA_AMI_ID
+export JAVA_AMI_ID=$(aws ec2 describe-images \
+  --filter 'Name=is-public,Values=false'  \
+  --query 'Images[].[ImageId, Name]' \
+  --output text | sort -k2 | grep 'packer-aws-java' | tail -1 | cut -f1);
+
 ### set the ssh keyname and file
 export SSH_KEYPAIR_NAME="packer"
 export SSH_PRIVATE_KEY_FILE="$HOME/.ssh/packer.pem"
