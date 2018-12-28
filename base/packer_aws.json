@@ -48,24 +48,6 @@
       "playbook_file": "./ansible/playbook.yml"
     },
     {
-	  "type": "file",
-	  "source": "restart_elk_services.sh",
-	  "destination": "/home/vagrant/restart_elk_services.sh"
-	},
-    {
-	  "type": "file",
-	  "source": "check_elk_services.sh",
-	  "destination": "/home/vagrant/check_elk_services.sh"
-	},
-    {
-      "type": "shell",
-      "execute_command": "echo '{{ user `ssh_password` }}' | sudo -E -S bash '{{.Path}}'",
-      "scripts": [
-        "restart_elk_services.sh",
-        "check_elk_services.sh"
-      ]
-    },
-    {
       "type": "file",
       "source": "./serverspec",
       "destination": "/tmp/"
