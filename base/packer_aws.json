@@ -58,5 +58,12 @@
         "cd /tmp/serverspec; rake spec"
       ]
     }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "manifest.json",
+      "strip_path": true
+    }
   ]
 }
