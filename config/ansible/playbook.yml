@@ -2,7 +2,7 @@
 ---
 # playbook.yml
 
-- hosts: all
+- hosts: localhost
   connection: local
   gather_facts: yes
   become: true

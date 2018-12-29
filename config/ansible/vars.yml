@@ -157,7 +157,7 @@ elasticsearch:
   action:
     destructive_requires_name: false
   install_plugins: []
-      
+
 # apolloclark/logstash
 logstash:
   version: "6.4.2"
