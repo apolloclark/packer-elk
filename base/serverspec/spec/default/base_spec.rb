@@ -1,5 +1,44 @@
 require 'spec_helper'
 
+# Define installed packages
+Packages = {
+  'filebeat' => {
+    version: '6.4.2'
+  },
+  'metricbeat' => {
+    version: '6.4.2'
+  },
+  'heartbeat-elastic' => {
+    version: '6.4.2'
+  },
+  'packetbeat' => {
+    version: '6.4.2'
+  },
+  'auditbeat' => {
+    version: '6.4.2'
+  },
+  'elasticsearch' => {
+    version: '6.4.2'
+  },
+  'logstash' => {
+    version: '1:6.4.2-1'
+  },
+  'kibana' => {
+    version: '6.4.2'
+  },
+  'osquery' => {
+    version: '2.11.2-1.linux'
+  }
+}
+
+# Define auto-start services
+InstalledServices = []
+
+# Define active services
+ActiveServices = []
+
+
+
 # https://www.singlestoneconsulting.com/articles/writing-efficient-infrastructure-tests-with-serverspec
 # Verify packages
 Packages.each do |name, details|
