@@ -54,7 +54,9 @@
     },
     {
       "type": "shell",
+      "execute_command": "echo '{{ user `ssh_password` }}' | sudo -E -S bash '{{.Path}}'",
       "inline": [
+        "source /home/root/.rvm/scripts/rvm;",
         "cd /tmp/serverspec; rake spec"
       ]
     }
