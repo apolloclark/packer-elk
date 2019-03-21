@@ -3,31 +3,31 @@ require 'spec_helper'
 # Define installed packages
 Packages = {
   'filebeat' => {
-    version: '6.4.2'
+    version: '6.6.2'
   },
   'metricbeat' => {
-    version: '6.4.2'
+    version: '6.6.2'
   },
   'heartbeat-elastic' => {
-    version: '6.4.2'
+    version: '6.6.2'
   },
   'packetbeat' => {
-    version: '6.4.2'
+    version: '6.6.2'
   },
   'auditbeat' => {
-    version: '6.4.2'
+    version: '6.6.2'
   },
   'elasticsearch' => {
-    version: '6.4.2'
+    version: '6.6.2'
   },
   'logstash' => {
-    version: '1:6.4.2-1'
+    version: '1:6.6.2-1'
   },
   'kibana' => {
-    version: '6.4.2'
+    version: '6.6.2'
   },
   'osquery' => {
-    version: '2.11.2-1.linux'
+    version: '3.3.2-1.linux'
   }
 }
 
