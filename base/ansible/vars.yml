@@ -39,42 +39,42 @@ kafka:
 
 # apolloclark/heartbeat
 heartbeat:
-  version: "6.4.2"
+  version: "6.6.2"
   install_only: true
 
 # apolloclark/metricbeat
 metricbeat:
-  version: "6.4.2"
+  version: "6.6.2"
   install_only: true
 
 # apolloclark/packetbeat
 packetbeat:
-  version: "6.4.2"
+  version: "6.6.2"
   install_only: true
 
 # apolloclark/filebeat
 filebeat:
-  version: "6.4.2"
+  version: "6.6.2"
   install_only: true
 
 # apolloclark/auditbeat
 auditbeat:
-  version: "6.4.2"
+  version: "6.6.2"
   install_only: true
 
 # apolloclark/elasticsearch
 # BINDING TO 0.0.0.0 IS DANGEROUS, UNLESS YOU ENFORCE FIREWALL RULES
 # OR USE X-PACK
 elasticsearch:
-  version: "6.4.2"
+  version: "6.6.2"
   install_only: true
       
 # apolloclark/logstash
 logstash:
-  version: "6.4.2"
+  version: "6.6.2"
   install_only: true
 
 # apolloclark/kibana
 kibana:
-  version: "6.4.2"
+  version: "6.6.2"
   install_only: true
