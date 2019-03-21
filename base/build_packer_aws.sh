@@ -30,8 +30,8 @@ export JAVA_AMI_ID=$(aws ec2 describe-images \
   --output text | sort -k2 | grep 'packer-aws-java' | tail -1 | cut -f1);
 
 ### set the ssh keyname and file
-export SSH_KEYPAIR_NAME="packer"
-export SSH_PRIVATE_KEY_FILE="$HOME/.ssh/packer.pem"
+export SSH_KEYPAIR_NAME=${SSH_KEYPAIR_NAME:="packer"}
+export SSH_PRIVATE_KEY_FILE="$HOME/.ssh/$SSH_KEYPAIR_NAME.pem"
 
 
 
