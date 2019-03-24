@@ -180,7 +180,7 @@ curl -s -XGET 'http://127.0.0.1:9200/filebeat-*/_search?q=system.syslog.message:
 # list documents in a given index, parse results
 curl -s -XGET 'http://127.0.0.1:9200/filebeat-*/_search?q=source:\/var\/log\/auth.log&size=10000' | \
   jq '.hits.hits[]._source | select (.!=null)'
-  
+
 # delete index
 curl -s -XDELETE 'http://127.0.0.1:9200/auditbeat-*/'
 ```

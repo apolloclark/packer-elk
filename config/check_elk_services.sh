@@ -1,5 +1,6 @@
 #!/bin/bash
 
+systemctl status osqueryd --no-pager
 systemctl status auditbeat --no-pager
 systemctl status filebeat --no-pager
 systemctl status metricbeat --no-pager

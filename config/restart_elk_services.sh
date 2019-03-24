@@ -14,3 +14,7 @@ service filebeat restart
 service metricbeat restart
 service heartbeat-elastic restart
 service packetbeat restart
+
+service osqueryd stop
+rm -rf /var/osquery/osquery.db/*
+service osqueryd restart
