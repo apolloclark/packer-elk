@@ -28,13 +28,5 @@ Vagrant.configure(2) do |config|
         override.vm.network "forwarded_port", guest: 9092, host: 9092, auto_correct: true
         override.vm.network "forwarded_port", guest: 9200, host: 9200, auto_correct: true
         override.vm.network "forwarded_port", guest: 9300, host: 9300, auto_correct: true
-
-        # setup local apt-get cache
-        if Vagrant.has_plugin?("vagrant-cachier")
-            # Configure cached packages to be shared between instances of the same base box.
-            # https://github.com/fgrehm/vagrant-cachier
-            # More info on the "Usage" link above
-            override.cache.scope = :box
-        end
     end
 end

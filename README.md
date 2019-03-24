@@ -63,6 +63,12 @@ nano /var/log/auth.log
 nano /var/log/osquery/osqueryd.results.log
 nano /var/log/osquery/osqueryd.INFO
 nano /var/log/osquery/osqueryd.WARNING
+
+nano /etc/osquery/osquery.conf
+
+jq '.name' /var/log/osquery/osqueryd.results.log | sort | uniq
+
+osqueryi --pack it-compliance
 ```
 
 *Filebeat*

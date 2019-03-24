@@ -23,7 +23,7 @@ Vagrant.configure(2) do |config|
         # Windows supports: smb
         # Mac supports: rsync, nfs
         # override.vm.synced_folder host_folder.to_s, guest_folder.to_s, type: "smb"
-        override.vm.synced_folder "./", "/vagrant"
+        override.vm.synced_folder "./data", "/vagrant"
             # owner: "vagrant", group: "vagrant",
             # mount_options: ['dmode=777','fmode=777']
 
@@ -59,13 +59,5 @@ Vagrant.configure(2) do |config|
         # accessing "localhost:8080" will access port 80 on the guest machine.
         # https://www.vagrantup.com/docs/networking/forwarded_ports.html
         override.vm.network "forwarded_port", guest: 5601, host: 5601, auto_correct: true
-    end
-
-    # setup local apt-get cache
-    if Vagrant.has_plugin?("vagrant-cachier")
-        # Configure cached packages to be shared between instances of the same base box.
-        # https://github.com/fgrehm/vagrant-cachier
-        # More info on the "Usage" link above
-        override.cache.scope = :box
     end
 end
