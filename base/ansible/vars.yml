@@ -32,6 +32,10 @@ crontab:
   global:
     - "@reboot root /home/vagrant/restart_elk_services.sh"
 
+# apolloclark/osquery
+osquery:
+  version: "3.3.2-1.linux"
+
 # apolloclark/kafka
 kafka:
   version: "2.0.0"

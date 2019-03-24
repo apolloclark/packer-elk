@@ -32,6 +32,10 @@ crontab:
   global:
     - "@reboot root /home/vagrant/restart_elk_services.sh"
 
+# apolloclark/osquery
+osquery:
+  version: "3.3.2-1.linux"
+
 # apolloclark/kafka
 kafka:
   version: "2.0.0"
@@ -92,11 +96,11 @@ packetbeat:
     elasticsearch:
       enabled: false
       hosts:
-       - "{{ es_ip }}:9200"
+        - "{{ es_ip }}:9200"
     kafka:
       enabled: true
       hosts:
-       - "{{ kafka_ip }}:9092"
+        - "{{ kafka_ip }}:9092"
   setup:
     dashboards:
       enabled: true
@@ -108,15 +112,35 @@ packetbeat:
 # apolloclark/filebeat
 filebeat:
   version: "6.6.2"
+  modules:
+    system:
+      syslog:
+        enabled: true
+        var:
+          paths: []
+          convert_timezone: false
+        input: []
+      auth:
+        enabled: true
+        var:
+          paths: []
+          convert_timezone: false
+        input: []
+      osquery:
+        enabled: true
+        var:
+          paths:
+            - "/var/log/osquery/osqueryd.results.log"
+          use_namespace: true
   output:
     elasticsearch:
       enabled: false
       hosts:
-       - "{{ es_ip }}:9200"
+        - "{{ es_ip }}:9200"
     kafka:
       enabled: true
       hosts:
-       - "{{ kafka_ip }}:9092"
+        - "{{ kafka_ip }}:9092"
   setup:
     dashboards:
       enabled: true
@@ -132,11 +156,11 @@ auditbeat:
     elasticsearch:
       enabled: false
       hosts:
-       - "{{ es_ip }}:9200"
+        - "{{ es_ip }}:9200"
     kafka:
       enabled: true
       hosts:
-       - "{{ kafka_ip }}:9092"
+        - "{{ kafka_ip }}:9092"
   setup:
     dashboards:
       enabled: true
@@ -156,7 +180,8 @@ elasticsearch:
     publish_host: "_local_"
   action:
     destructive_requires_name: false
-  install_plugins: []
+  install_plugins:
+    - "ingest-geoip"
 
 # apolloclark/logstash
 logstash:
