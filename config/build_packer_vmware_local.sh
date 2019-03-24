@@ -5,11 +5,9 @@ start=`date +%s`
 rm -rf ./output/vmware
 
 packer validate packer_vmware.json
-
 packer inspect packer_vmware.json
-
 jq 'del(."post-processors")' packer_vmware.json | tee /dev/tty | \
-packer build -
+  packer build -
 
 end=`date +%s`
 secs=$((end-start))

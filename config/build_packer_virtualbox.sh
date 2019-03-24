@@ -6,9 +6,7 @@ rm -rf ./output/vbox
 rm -rf ./box/virtualbox
 
 packer validate packer_virtualbox.json
-
 packer inspect packer_virtualbox.json
-
 packer build packer_virtualbox.json
 
 end=`date +%s`

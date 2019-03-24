@@ -5,9 +5,7 @@ start=`date +%s`
 rm -rf ./output/vmware
 
 packer validate packer_vmware.json
-
 packer inspect packer_vmware.json
-
 packer build packer_vmware.json
 
 end=`date +%s`

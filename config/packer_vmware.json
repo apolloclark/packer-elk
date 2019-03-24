@@ -72,6 +72,7 @@
     {
       "type": "shell",
       "inline": [
+        "source /home/root/.rvm/scripts/rvm;",
         "cd /tmp/serverspec; rake spec"
       ]
     }

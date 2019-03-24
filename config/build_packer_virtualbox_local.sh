@@ -6,11 +6,9 @@ rm -rf ./output/vbox
 rm -rf ./box/virtualbox
 
 packer validate packer_virtualbox.json
-
 packer inspect packer_virtualbox.json
-
 jq 'del(."post-processors")' packer_virtualbox.json | tee /dev/tty | \
-packer build -
+  packer build -
 
 end=`date +%s`
 secs=$((end-start))
