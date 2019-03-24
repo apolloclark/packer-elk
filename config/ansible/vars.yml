@@ -182,6 +182,9 @@ elasticsearch:
     destructive_requires_name: false
   install_plugins:
     - "ingest-geoip"
+  action:
+    auto_create_index: "true"
+    destructive_requires_name: "false"
 
 # apolloclark/logstash
 logstash:
