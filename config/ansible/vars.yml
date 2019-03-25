@@ -180,8 +180,7 @@ elasticsearch:
     publish_host: "_local_"
   action:
     destructive_requires_name: false
-  install_plugins:
-    - "ingest-geoip"
+  install_plugins: []
   action:
     auto_create_index: "true"
     destructive_requires_name: "false"
