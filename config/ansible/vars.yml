@@ -126,12 +126,12 @@ filebeat:
           paths: []
           convert_timezone: false
         input: []
-      osquery:
-        enabled: true
-        var:
-          paths:
-            - "/var/log/osquery/osqueryd.results.log"
-          use_namespace: true
+    osquery:
+      enabled: true
+      var:
+        paths:
+          - "/var/log/osquery/osqueryd.results.log"
+        use_namespace: true
   output:
     elasticsearch:
       enabled: false
