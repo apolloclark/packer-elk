@@ -54,7 +54,8 @@ ActiveServices = [
   'elasticsearch',
   'logstash',
   'kibana',
-  'osqueryd'
+  'osqueryd',
+  'elastalert'
 ]
 
 
