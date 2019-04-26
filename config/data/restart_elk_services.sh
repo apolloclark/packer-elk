@@ -3,6 +3,7 @@
 sleep 30s
 service elasticsearch restart
 sleep 45s
+service elastalert restart
 service kibana restart
 service zookeeper restart
 service kafka restart

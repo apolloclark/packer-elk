@@ -17,6 +17,7 @@
     - apolloclark.elasticsearch
     - apolloclark.logstash
     - apolloclark.kibana
+    - apolloclark.elastalert
     - apolloclark.auditbeat
     - apolloclark.filebeat
     - apolloclark.packetbeat

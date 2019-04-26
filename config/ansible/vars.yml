@@ -178,8 +178,6 @@ elasticsearch:
     host: "0.0.0.0"
     bind_host: "0.0.0.0"
     publish_host: "_local_"
-  action:
-    destructive_requires_name: false
   install_plugins: []
   action:
     auto_create_index: "true"
@@ -191,7 +189,18 @@ logstash:
   input_conf: "{{ playbook_dir }}/files/10-beats-input.conf"
   filter_conf: "{{ playbook_dir }}/files/20-syslog-filter.conf"
   output_conf: "{{ playbook_dir }}/files/30-elasticsearch-output.conf"
+  install_plugins:
+    - logstash-input-s3
+    - logstash-input-cloudwatch
+    - logstash-codec-cloudtrail
 
 # apolloclark/kibana
 kibana:
   version: "6.6.2"
+
+# apolloclark/elastalert
+elastalert:
+  pip_packages:
+  - "elasticsearch==6.3.1"
+  - "elastalert==0.1.39"
+  es_host: "{{ es_ip }}"

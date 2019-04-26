@@ -171,6 +171,9 @@ nano /etc/elasticsearch/elasticsearch.yml
 nano /var/log/elasticsearch/elasticsearch.log
 tail -f /var/log/elasticsearch/elasticsearch.log
 
+# list status
+curl -s -XGET 'http://127.0.0.1:9200/_cluster/health'
+
 # list indices
 curl -s -XGET 'http://127.0.0.1:9200/_cat/indices?v'
 

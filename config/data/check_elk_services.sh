@@ -11,3 +11,4 @@ systemctl status kafka --no-pager
 systemctl status logstash --no-pager
 systemctl status elasticsearch --no-pager
 systemctl status kibana --no-pager
+systemctl status elastalert --no-pager

@@ -51,20 +51,20 @@
     },
     {
 	  "type": "file",
-	  "source": "restart_elk_services.sh",
+	  "source": "./data/restart_elk_services.sh",
 	  "destination": "/home/vagrant/restart_elk_services.sh"
 	},
     {
 	  "type": "file",
-	  "source": "check_elk_services.sh",
+	  "source": "./data/check_elk_services.sh",
 	  "destination": "/home/vagrant/check_elk_services.sh"
 	},
     {
       "type": "shell",
       "execute_command": "echo '{{ user `ssh_password` }}' | sudo -E -S bash '{{.Path}}'",
       "scripts": [
-        "restart_elk_services.sh",
-        "check_elk_services.sh"
+        "./data/restart_elk_services.sh",
+        "./data/check_elk_services.sh"
       ]
     },
     {
