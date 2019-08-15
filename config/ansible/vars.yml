@@ -43,7 +43,7 @@ kafka:
 
 # apolloclark/heartbeat
 heartbeat:
-  version: "6.6.2"
+  version: "6.7.1"
   monitors:
     http:
       schedule: "'@every 5s'"
@@ -67,7 +67,7 @@ heartbeat:
 
 # apolloclark/metricbeat
 metricbeat:
-  version: "6.6.2"
+  version: "6.7.1"
   output:
     elasticsearch:
       enabled: false
@@ -87,7 +87,7 @@ metricbeat:
 
 # apolloclark/packetbeat
 packetbeat:
-  version: "6.6.2"
+  version: "6.7.1"
   protocols:
     http:
       enabled: true
@@ -111,7 +111,7 @@ packetbeat:
 
 # apolloclark/filebeat
 filebeat:
-  version: "6.6.2"
+  version: "6.7.1"
   modules:
     system:
       syslog:
@@ -151,7 +151,7 @@ filebeat:
 
 # apolloclark/auditbeat
 auditbeat:
-  version: "6.6.2"
+  version: "6.7.1"
   output:
     elasticsearch:
       enabled: false
@@ -173,7 +173,7 @@ auditbeat:
 # BINDING TO 0.0.0.0 IS DANGEROUS, UNLESS YOU ENFORCE FIREWALL RULES
 # OR USE X-PACK
 elasticsearch:
-  version: "6.6.2"
+  version: "6.7.1"
   network:
     host: "0.0.0.0"
     bind_host: "0.0.0.0"
@@ -185,7 +185,7 @@ elasticsearch:
 
 # apolloclark/logstash
 logstash:
-  version: "6.6.2"
+  version: "6.7.1"
   input_conf: "{{ playbook_dir }}/files/10-beats-input.conf"
   filter_conf: "{{ playbook_dir }}/files/20-syslog-filter.conf"
   output_conf: "{{ playbook_dir }}/files/30-elasticsearch-output.conf"
@@ -196,7 +196,7 @@ logstash:
 
 # apolloclark/kibana
 kibana:
-  version: "6.6.2"
+  version: "6.7.1"
 
 # apolloclark/elastalert
 elastalert:
