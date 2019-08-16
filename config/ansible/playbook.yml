@@ -11,7 +11,9 @@
     - "vars.yml"
   roles:
     - geerlingguy.firewall
-    - geerlingguy.java
+    - geerlingguy.git
+    - apolloclark.nano_highlighting
+    - java_role
     - apolloclark.zookeeper
     - apolloclark.kafka
     - apolloclark.elasticsearch

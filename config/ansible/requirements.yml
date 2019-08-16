@@ -1,13 +1,16 @@
 # http://docs.ansible.com/ansible/latest/galaxy.html#installing-multiple-roles-from-a-file
 ---
 - src: geerlingguy.firewall
-- src: geerlingguy.java               # https://github.com/geerlingguy/ansible-role-java
+- src: geerlingguy.git                # https://github.com/geerlingguy/ansible-role-git
+- src: apolloclark.nano_highlighting  # https://github.com/apolloclark/ansible-role-nano-highlighting
+- src: https://github.com/apolloclark/java_role
+  version: develop
+  name: java_role
 - src: apolloclark.zookeeper          # https://github.com/apolloclark/ansible-role-zookeeper
 - src: apolloclark.kafka              # https://github.com/apolloclark/ansible-role-kafka
 - src: apolloclark.elasticsearch      # https://github.com/apolloclark/ansible-role-elasticsearch
 - src: apolloclark.logstash           # https://github.com/apolloclark/ansible-role-logstash
 - src: apolloclark.kibana             # https://github.com/apolloclark/ansible-role-kibana
-- src: apolloclark.elastalert         # https://github.com/apolloclark/ansible-role-elastalert
 - src: apolloclark.metricbeat         # https://github.com/apolloclark/ansible-role-metricbeat
 - src: apolloclark.heartbeat          # https://github.com/apolloclark/ansible-role-heartbeat
 - src: apolloclark.packetbeat         # https://github.com/apolloclark/ansible-role-packetbeat

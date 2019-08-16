@@ -12,7 +12,7 @@
     - geerlingguy.firewall
     - geerlingguy.git
     - apolloclark.nano_highlighting
-    - geerlingguy.java
+    - java_role
     - apolloclark.zookeeper
     - apolloclark.kafka
     - apolloclark.elasticsearch

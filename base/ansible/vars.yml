@@ -14,9 +14,9 @@ firewall_allowed_tcp_ports:
   - "9200" # Elasticsearch
   - "9300" # Elasticsearch
 
-# geerlingguy/java
-java_packages:
-  - openjdk-8-jre
+# java_role
+java_implementation: openjdk
+java_open_jdk_version: "11.x"
 
 
 
