@@ -11,6 +11,7 @@
 - src: apolloclark.elasticsearch      # https://github.com/apolloclark/ansible-role-elasticsearch
 - src: apolloclark.logstash           # https://github.com/apolloclark/ansible-role-logstash
 - src: apolloclark.kibana             # https://github.com/apolloclark/ansible-role-kibana
+- src: apolloclark.elastalert         # https://github.com/apolloclark/ansible-role-elastalert
 - src: apolloclark.metricbeat         # https://github.com/apolloclark/ansible-role-metricbeat
 - src: apolloclark.heartbeat          # https://github.com/apolloclark/ansible-role-heartbeat
 - src: apolloclark.packetbeat         # https://github.com/apolloclark/ansible-role-packetbeat
